@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:injection_tracker/settings.dart';
 
 void main() {
   runApp(const InjectionTracker());
@@ -10,7 +11,7 @@ class InjectionTracker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Injection Tracker',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
@@ -50,7 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Padding(
-              padding: EdgeInsetsGeometry.all(20.0),
+              padding: EdgeInsets.all(20.0),
               child: Column(
                 children: [
                   const Text(
@@ -71,15 +72,26 @@ class _MyHomePageState extends State<MyHomePage> {
               height: 500.0,
               width: 500.0,
               child: FittedBox(
-                child: FloatingActionButton(
+                child: IconButton(
                   onPressed: _incrementCounter,
-                  shape: const CircleBorder(),
-                  child: Icon(arrowDirection(), size: 50.0),
+                  icon: Icon(arrowDirection(), size: 50.0),
                 ),
               ),
             ),
           ],
         ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.miniStartFloat,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute<void>(
+              builder: (context) => const SettingsWidget(),
+            ),
+          );
+        },
+        child: Icon(Icons.settings),
       ),
     );
   }
